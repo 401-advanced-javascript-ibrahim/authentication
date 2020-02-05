@@ -19,18 +19,6 @@ users.pre('save', async function () {
   return Promise.reject();
 });
 
-// users.statics.authenticateBasic = function (auth) {
-//   let query = { username: auth.username };
-//   return this.findOne(query)
-//     .then(user => user && user.comparePassword(auth.password))
-//     .catch(err => console.error(err));
-// };
-
-// users.methods.comparePassword = function (pass) {
-//   return bcrypt.compare(pass, this.password)
-//     .then(valid => valid ? this : null);
-// };
-
 users.statics.authenticateBasic = async function (user, pass) { /// I got confused to use eathier statcs or methods for this function
   let valid = await bcrypt.compare(pass, this.password);
   return valid ? user : Promise.reject();
