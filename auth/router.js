@@ -14,9 +14,11 @@ router.post('/signin', authMiddleware, signin);
 
 function signup(req, res, next) {
   let user = new User(req.body);
+  console.log('ssss', user);
   user.save()
     .then(user => {
-      req.token = user.tokenGenerator();
+      console.log('asdsad',user);
+      req.token = user.tokenGenerator(user);
       req.user = user;
       res.status(200).send(req.token);
     })
